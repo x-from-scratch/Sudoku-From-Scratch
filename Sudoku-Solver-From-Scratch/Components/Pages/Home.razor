@@ -1,8 +1,20 @@
 ﻿@page "/"
-
-<PageTitle>Sudoku Solver</PageTitle>
+@using Sudoku_Solver_From_Scratch.Components.BackEnd;
 
 <h1>Sudoku Solver</h1>
 
-Welcome to your new app.
+<SudokuGrid Board="board" />
 
+<button @onclick="SolveSudoku">
+    Solve
+</button>
+
+@code {
+    
+    private SudokuBoard board = new();
+
+    private void SolveSudoku()
+    {
+        // Call your Sudoku-solving algorithm here.
+    }
+}
