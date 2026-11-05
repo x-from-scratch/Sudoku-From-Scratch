@@ -7,8 +7,14 @@
 
 <SudokuGrid Board="_board" />
 
-<button @onclick="SolveSudoku">
+<button class="btn btn-primary"
+        @onclick="SolveSudoku">
     Solve
+</button>
+
+<button class="btn btn-primary"
+        @onclick="ClearSudoku">
+    Clear
 </button>
 
 @code {
@@ -18,6 +24,13 @@
     private void SolveSudoku()
     {
         _board.SolveSudoku();
+        
+        StateHasChanged();
+    }
+
+    private void ClearSudoku()
+    {
+        _board.Clear();
         
         StateHasChanged();
     }
