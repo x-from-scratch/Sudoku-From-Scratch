@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Sudoku-Solver-From-Scratch")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dd64f638255330ba3cb4219c98486ffab244797b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Sudoku-Solver-From-Scratch")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Sudoku-Solver-From-Scratch")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
