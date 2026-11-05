@@ -1,0 +1,32 @@
+.sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 50px);
+    grid-template-rows: repeat(9, 50px);
+    border: 3px solid #222;
+    width: fit-content;
+}
+
+.sudoku-cell {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 22px;
+    border: 1px solid #ccc;
+    outline: none;
+    appearance: textfield;
+}
+
+.sudoku-cell::-webkit-inner-spin-button,
+.sudoku-cell::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+.right-border {
+    border-right: 3px solid #222;
+}
+
+.bottom-border {
+    border-bottom: 3px solid #222;
+}

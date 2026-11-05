@@ -1,0 +1,37 @@
+@using Sudoku_Solver_From_Scratch.Components.BackEnd;
+
+<div class="sudoku-grid">
+    
+<!-- Construct the grid -->
+@for (int row = 0; row < 9; row++)
+{
+    @for (int col = 0; col < 9; col++)
+    {
+        <input type="number"
+               min="1"
+               max="9"
+               class="@GetCellClass(row, col)"
+               @bind="Board.Grid[row, col]" />
+    }
+}
+
+</div>
+
+
+@code {
+    [Parameter]
+    public SudokuBoard Board { get; set; } = new();
+
+    private string GetCellClass(int row, int col)
+    {
+        string css = "sudoku-cell";
+
+        if (col % 3 == 2 && col != 8)
+            css += " right-border";
+
+        if (row % 3 == 2 && row != 8)
+            css += " bottom-border";
+
+        return css;
+    }
+}
