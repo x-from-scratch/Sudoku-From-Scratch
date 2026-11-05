@@ -57,6 +57,7 @@
     /// <returns></returns>
     private string GetCellClass(int row, int col)
     {
+        
         string css = "sudoku-cell";
 
         if (col % 3 == 2 && col != 8)
@@ -93,13 +94,19 @@
         if (row == _selectedRow && col == _selectedCol)
             css += " selected-cell";
 
-        if (row == _selectedRow || col == _selectedCol)
+        if (row == _selectedRow ^ col == _selectedCol)
             css += " highlighted-cell";
         
         // Check if the cell is bold or not.
         if (Board.UserInput[row, col])
         {
             css += " user-input";
+        }
+        
+        // Check if the cell is correctly inputted:
+        if (Board.WrongCell[row, col])
+        {
+            css += " wrong-cell";
         }
 
         return css;
@@ -136,6 +143,8 @@
         Board.SetCell(row, col, number);
         
         Board.UserInput[row, col] = Board.Grid[row, col] != 0;
+        
+        Board.UpdateSafeness();
     }
     
     /// <summary>

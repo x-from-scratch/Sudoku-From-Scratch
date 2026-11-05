@@ -7,6 +7,8 @@ public class SudokuBoard
     public int[,] Grid { get; set; } = new int[9, 9];
     
     public bool[,] UserInput { get; set; } = new bool[9, 9];
+
+    public bool[,] WrongCell  { get; set; } = new bool[9, 9];
     
     public void SetCell(int row, int col, int value)
     {
@@ -34,6 +36,60 @@ public class SudokuBoard
         SolveRec(Grid, 0, 0, row, col, box);
     }
 
+    public void UpdateSafeness()
+    {
+        for (int i = 0; i < Grid.GetLength(0); i++)
+        {
+            for (int j = 0; j < Grid.GetLength(1); j++)
+            {
+                if (!IsSafe(i, j, Grid[i, j]))
+                {
+                    WrongCell[i, j] = true;
+                }
+                else
+                {
+                    WrongCell[i, j] = false;
+                }
+            }
+        }
+    }
+
+    private bool IsSafe(int row, int col, int num)
+    {
+        if (num == 0)
+            return true;
+        
+        // Check if num exists in the row or the column:
+        for (int i = 0; i < 9; i++)
+        {
+            if (i != col && Grid[row, i] == num)
+                return false;
+
+            if (i != row && Grid[i, col] == num)
+                return false;
+        }
+        
+        // Check if num exist in the 3 by 3 box:
+        int startRow = row - (row % 3);
+        int startColumn = col - (col % 3);
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                int r = startRow + i;
+                int c = startColumn + j;
+
+                if ((r != row && c != col) && Grid[r, c] == num)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     // Imported from my github repo: https://github.com/Haydara1/cs-cli-tools/blob/master/Sudoku/Sudoku-Solver.cs
     
     // The following solver uses bit-masking and backtracking.
@@ -41,6 +97,9 @@ public class SudokuBoard
     // Define a function to check whether it is safe to put a number in a given position.
     private bool IsSafe(int[,] mat, int row, int col, int num)
     {
+        if (num == 0)
+            return true;
+        
         // Check if num exists in the row or the column:
         for (int i = 0; i < 9; i++)
         {
