@@ -1,6 +1,9 @@
 @using Sudoku_Solver_From_Scratch.Components.BackEnd;
 
-<div class="sudoku-grid">
+<!-- Used to change focus from the cells to itself. Doesn't work without tabindex. -->
+<div class="sudoku-grid" @onkeydown="HandleKeyDown"
+     tabindex="0"
+     @ref="_gridReference">
     
 <!-- Construct the grid -->
 @for (int row = 0; row < 9; row++)
@@ -16,7 +19,9 @@
                max="9"
                class="@GetCellClass(row, col)"
                value="@(Board.Grid[row, col] != 0 ? Board.Grid[row, col] : "")"
-               @oninput="value => CellInput(currentRow, currentCol, value)"/>
+               @ref="_cellReferences[currentRow, currentCol]"
+               @oninput="value => CellInput(currentRow, currentCol, value)"
+               @onkeydown:preventDefault="@_cellNotFocused"/>
     }
 }
 </div>
@@ -26,6 +31,24 @@
     [Parameter]
     public SudokuBoard Board { get; set; } = new();
 
+    // Focusing and navigating functionality
+    private int _selectedRow = 0;
+    private int _selectedCol = 0;
+
+    private bool _cellNotFocused = true;
+    
+    private readonly ElementReference[,] _cellReferences = new ElementReference[9, 9];
+    private ElementReference _gridReference;
+    
+    // Set focus on the grid for the first render.
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await FocusGrid();
+        }
+    }
+    
     /// <summary>
     /// Returns the cell class in css.
     /// </summary>
@@ -66,6 +89,14 @@
             }
         }
 
+        
+        if (row == _selectedRow && col == _selectedCol)
+            css += " selected-cell";
+
+        if (row == _selectedRow || col == _selectedCol)
+            css += " highlighted-cell";
+        
+        // Check if the cell is bold or not.
         if (Board.UserInput[row, col])
         {
             css += " user-input";
@@ -87,4 +118,67 @@
         Board.UserInput[row, col] = Board.Grid[row, col] != 0;
     }
     
+    /// <summary>
+    /// Either changes focus or navigates through cells.
+    /// </summary>
+    /// <param name="e"></param>
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        // Change focus:
+        if (e.Key == "Enter")
+        {
+            _cellNotFocused = !_cellNotFocused;
+            
+            // Stop moving cells while one cell is focused.
+            if (!_cellNotFocused)
+            {
+                await FocusCell(_selectedRow, _selectedCol);
+                return;
+            }
+            else
+            {
+             await FocusGrid();   
+            }
+        }
+
+        if (!_cellNotFocused)
+            return;
+        
+        switch (e.Key)
+        {
+            case "ArrowUp":
+                _selectedRow = Math.Max(0, _selectedRow - 1);
+                break;
+
+            case "ArrowDown":
+                _selectedRow = Math.Min(8, _selectedRow + 1);
+                break;
+
+            case "ArrowLeft":
+                _selectedCol = Math.Max(0, _selectedCol - 1);
+                break;
+
+            case "ArrowRight":
+                _selectedCol = Math.Min(8, _selectedCol + 1);
+                break;
+        }
+    }
+    
+    /// <summary>
+    /// Focuses the cell at row and column.
+    /// </summary>
+    /// <param name="row"></param>
+    /// <param name="col"></param>
+    private async Task FocusCell(int row, int col)
+    {
+        await _cellReferences[row, col].FocusAsync();
+    }
+
+    /// <summary>
+    /// Focuses the grid.
+    /// </summary>
+    private async Task FocusGrid()
+    {
+        await _gridReference.FocusAsync();
+    }
 }

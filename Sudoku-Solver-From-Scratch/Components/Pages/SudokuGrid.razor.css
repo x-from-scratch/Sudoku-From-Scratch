@@ -42,3 +42,12 @@
 .user-input {
     font-weight: bold;
 }
+
+.selected-cell {
+    background-color: #facc15;
+    border: 2px solid #eab308;
+}
+
+.highlighted-cell {
+    background-color: #dbeafe;
+}
