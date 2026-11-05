@@ -8,22 +8,9 @@ public class SudokuBoard
     
     public bool[,] UserInput { get; set; } = new bool[9, 9];
     
-    private void SetCell(int row, int col, int value)
+    public void SetCell(int row, int col, int value)
     {
         Grid[row, col] = value;
-    }
-
-    public void SetCell(int row, int col, ChangeEventArgs e)
-    {
-        
-        if (int.TryParse(e.Value?.ToString(), out int value))
-        {
-            this.SetCell(row, col, value);
-        }
-        else
-        {
-            this.SetCell(row, col, 0);
-        }
     }
 
     public void SolveSudoku()
