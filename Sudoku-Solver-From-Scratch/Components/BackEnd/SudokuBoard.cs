@@ -6,7 +6,7 @@ public class SudokuBoard
 {
     public int[,] Grid { get; set; } = new int[9, 9];
     
-    public void SetCell(int row, int col, int value)
+    private void SetCell(int row, int col, int value)
     {
         Grid[row, col] = value;
     }
