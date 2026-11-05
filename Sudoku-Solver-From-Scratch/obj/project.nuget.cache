@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Wbe2H2BFU5Y=",
+  "success": true,
+  "projectFilePath": "/Users/haydara/Developer/rider/Sudoku-Solver-From-Scratch/Sudoku-Solver-From-Scratch/Sudoku-Solver-From-Scratch.csproj",
+  "expectedPackageFiles": [
+    "/Users/haydara/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.13/microsoft.aspnetcore.app.internal.assets.10.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
