@@ -30,3 +30,11 @@
 .bottom-border {
     border-bottom: 3px solid #222;
 }
+
+.grey-cell {
+    background-color: rgb(73 67 67 / 0.15);
+}
+
+.white-cell {
+    background-color: rgb(255 255 255);
+}
