@@ -6,6 +6,8 @@ public class SudokuBoard
 {
     public int[,] Grid { get; set; } = new int[9, 9];
     
+    public bool[,] UserInput { get; set; } = new bool[9, 9];
+    
     private void SetCell(int row, int col, int value)
     {
         Grid[row, col] = value;
@@ -129,6 +131,20 @@ public class SudokuBoard
         }
 
         return false;
+    }
+    
+    // Clear the board:
+
+    public void Clear()
+    {
+        for (int i = 0; i < Grid.GetLength(0); i++)
+        {
+            for (int j = 0; j < Grid.GetLength(1); j++)
+            {
+                Grid[i, j] = 0;
+                UserInput[i, j] = false;
+            }
+        }
     }
         
 }
