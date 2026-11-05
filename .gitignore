@@ -1,6 +1,9 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/.idea
+/Sudoku-Solver-From-Scratch/bin
+/Sudoku-Solver-From-Scratch/obj
 # Editor-based HTTP Client requests
 /httpRequests/
 # Rider ignored files
