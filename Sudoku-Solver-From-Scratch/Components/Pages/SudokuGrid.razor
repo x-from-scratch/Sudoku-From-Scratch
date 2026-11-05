@@ -5,16 +5,20 @@
 <!-- Construct the grid -->
 @for (int row = 0; row < 9; row++)
 {
+    int currentRow = row;
+    
     @for (int col = 0; col < 9; col++)
     {
+        int currentCol = col;
+        
         <input type="number"
                min="1"
                max="9"
                class="@GetCellClass(row, col)"
-               @bind="Board.Grid[row, col]" />
+               value="@Board.Grid[row, col]"
+               @oninput="@(value => Board.SetCell(currentRow, currentCol, value))"/>
     }
 }
-
 </div>
 
 
