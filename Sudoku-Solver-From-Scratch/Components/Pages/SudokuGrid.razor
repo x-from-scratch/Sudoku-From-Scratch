@@ -113,7 +113,27 @@
     /// <param name="e"></param>
     private void CellInput(int row, int col, ChangeEventArgs e)
     {
-        Board.SetCell(row, col, e);
+        // Assert the user has input the correct number.
+        
+        /*
+         * Check for those thins:
+         * - The input is just one digit long.
+         * - The input is an integer.
+         * - The input does not exceed 9.
+         */
+        
+        string input = e.Value?.ToString() ?? "";
+
+        if (input.Length != 1 ||
+            !int.TryParse(input, out int number) ||
+            number < 1 || number > 9)
+        {
+            Board.Grid[row, col] = 0;
+            Board.UserInput[row, col] = false;
+            return;
+        }
+        
+        Board.SetCell(row, col, number);
         
         Board.UserInput[row, col] = Board.Grid[row, col] != 0;
     }
