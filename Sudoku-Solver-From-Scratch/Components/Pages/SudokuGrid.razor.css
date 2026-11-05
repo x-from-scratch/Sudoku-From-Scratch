@@ -32,9 +32,13 @@
 }
 
 .grey-cell {
-    background-color: rgb(73 67 67 / 0.15);
+    background-color: rgb(100 213 213 / 0.28);
 }
 
 .white-cell {
     background-color: rgb(255 255 255);
+}
+
+.user-input {
+    font-weight: bold;
 }
