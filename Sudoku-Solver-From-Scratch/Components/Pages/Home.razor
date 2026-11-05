@@ -1,9 +1,11 @@
 ﻿@page "/"
 @using Sudoku_Solver_From_Scratch.Components.BackEnd;
 
+@rendermode InteractiveServer
+
 <h1>Sudoku Solver</h1>
 
-<SudokuGrid Board="board" />
+<SudokuGrid Board="_board" />
 
 <button @onclick="SolveSudoku">
     Solve
@@ -11,10 +13,12 @@
 
 @code {
     
-    private SudokuBoard board = new();
+    private SudokuBoard _board = new();
 
     private void SolveSudoku()
     {
-        // Call your Sudoku-solving algorithm here.
+        _board.SolveSudoku();
+        
+        StateHasChanged();
     }
 }
