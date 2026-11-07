@@ -41,6 +41,7 @@
     margin-top: 30px;
     padding: 0 16px 40px;
     color: var(--text);
+    container-type: inline-size;
 }
 
 .sudoku-header {
@@ -107,14 +108,14 @@
 
 .sudoku-btn:focus-visible {
     outline: 3px solid color-mix(in srgb, var(--accent) 40%, transparent);
-    outline-offset: 2px;
-}
 
 .sudoku-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
+    outline-offset: 2px;
+}
 .sudoku-btn--primary {
     background: var(--accent);
     color: #fff;
@@ -132,4 +133,33 @@
 
 .sudoku-btn--secondary:hover:not(:disabled) {
     background: var(--secondary-hover);
+}
+
+/* Page content narrower than ~760px: stack the card, buttons below the grid */
+@container (max-width: 760px) {
+    .sudoku-card {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 16px;
+        width: 100%;
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    .sudoku-board {
+        overflow-x: visible;
+    }
+
+    /* ::deep because .sudoku-grid belongs to the child component */
+    .sudoku-card ::deep .sudoku-grid {
+        /* wrapper content width minus card padding (24) and border (2) and grid border (6) */
+        --cell-size: min(50px, calc((100cqw - 32px) / 9));
+    }
+
+    .sudoku-controls {
+        flex-direction: row;
+    }
+
+    .sudoku-btn {
+        padding: 10px 12px;
+    }
 }
