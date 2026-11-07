@@ -1,0 +1,18 @@
+.sudoku-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.sudoku-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.sudoku-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

@@ -5,17 +5,23 @@
 
 <h1>Sudoku Solver</h1>
 
-<SudokuGrid Board="_board" @ref="_sudokuGrid"/>
+<div class="sudoku-wrapper">
+    <div class="sudoku-container">
 
-<button class="btn btn-primary"
-        @onclick="SolveSudoku">
-    Solve
-</button>
+        <SudokuGrid Board="_board" @ref="_sudokuGrid" />
 
-<button class="btn btn-primary"
-        @onclick="ClearSudoku">
-    Clear
-</button>
+        <div class="sudoku-controls">
+            <button class="btn btn-primary" @onclick="SolveSudoku">
+                Solve
+            </button>
+
+            <button class="btn btn-secondary" @onclick="ClearSudoku">
+                Clear
+            </button>
+        </div>
+
+    </div>
+</div>
 
 @code {
     
