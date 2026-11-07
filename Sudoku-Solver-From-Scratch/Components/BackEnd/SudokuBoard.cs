@@ -4,56 +4,17 @@ namespace Sudoku_Solver_From_Scratch.Components.BackEnd;
 
 public class SudokuBoard
 {
+    #region Attributes
     public int[,] Grid { get; set; } = new int[9, 9];
     
     public bool[,] UserInput { get; set; } = new bool[9, 9];
 
     public bool[,] WrongCell  { get; set; } = new bool[9, 9];
+
+    #endregion
     
-    public void SetCell(int row, int col, int value)
-    {
-        Grid[row, col] = value;
-    }
-
-    public void SolveSudoku()
-    {
-        int n = Grid.GetLength(0);
-        int[] row = new int[n];
-        int[] col = new int[n];
-        int[] box = new int[n];
-
-        // Set the bits in bitmasks for values that are initially present
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (Grid[i, j] != 0) {
-                    row[i] |= (1 << Grid[i, j]);
-                    col[j] |= (1 << Grid[i, j]);
-                    box[(i / 3) * 3 + j / 3] |= (1 << Grid[i, j]);
-                }
-            }
-        }
-
-        SolveRec(Grid, 0, 0, row, col, box);
-    }
-
-    public void UpdateSafeness()
-    {
-        for (int i = 0; i < Grid.GetLength(0); i++)
-        {
-            for (int j = 0; j < Grid.GetLength(1); j++)
-            {
-                if (!IsSafe(i, j, Grid[i, j]))
-                {
-                    WrongCell[i, j] = true;
-                }
-                else
-                {
-                    WrongCell[i, j] = false;
-                }
-            }
-        }
-    }
-
+    #region Private functions
+    
     private bool IsSafe(int row, int col, int num)
     {
         if (num == 0)
@@ -90,6 +51,29 @@ public class SudokuBoard
         return true;
     }
 
+    // Checks whether the grid contains wrong cells.
+    private bool IsSafe()
+    {   
+        foreach(bool cell in WrongCell)
+            if(cell)
+                return false;
+        
+        return true;
+    }
+
+    // Checks whether the grid is empty
+    private bool IsEmpty()
+    {
+        foreach(int cell in Grid)
+            if(cell != 0)
+                return false;
+        
+        return true;
+    }
+    
+    #endregion
+    
+    #region Solving logic
     // Imported from my github repo: https://github.com/Haydara1/cs-cli-tools/blob/master/Sudoku/Sudoku-Solver.cs
     
     // The following solver uses bit-masking and backtracking.
@@ -179,8 +163,13 @@ public class SudokuBoard
         return false;
     }
     
-    // Clear the board:
-
+    #endregion
+    
+    # region Public functions
+    
+    /// <summary>
+    /// Clears the board.
+    /// </summary>
     public void Clear()
     {
         for (int i = 0; i < Grid.GetLength(0); i++)
@@ -192,5 +181,66 @@ public class SudokuBoard
             }
         }
     }
+    
+    /// <summary>
+    /// Updates the grid after input to check if it contains wrong cells.
+    /// </summary>
+    public void UpdateSafeness()
+    {
+        for (int i = 0; i < Grid.GetLength(0); i++)
+        {
+            for (int j = 0; j < Grid.GetLength(1); j++)
+            {
+                if (!IsSafe(i, j, Grid[i, j]))
+                {
+                    WrongCell[i, j] = true;
+                }
+                else
+                {
+                    WrongCell[i, j] = false;
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Solves the board.
+    /// </summary>
+    public void SolveSudoku()
+    {
+        if (!IsSafe() || IsEmpty())
+            return;
+        
+        int n = Grid.GetLength(0);
+        int[] row = new int[n];
+        int[] col = new int[n];
+        int[] box = new int[n];
+
+        // Set the bits in bitmasks for values that are initially present
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (Grid[i, j] != 0) {
+                    row[i] |= (1 << Grid[i, j]);
+                    col[j] |= (1 << Grid[i, j]);
+                    box[(i / 3) * 3 + j / 3] |= (1 << Grid[i, j]);
+                }
+            }
+        }
+
+        SolveRec(Grid, 0, 0, row, col, box);
+    }
+    
+    /// <summary>
+    /// Sets the cell at given row and column.
+    /// </summary>
+    /// <param name="row">The row of the input cell.</param>
+    /// <param name="col">The column of the input cell.</param>
+    /// <param name="value">The value of the input cell.</param>
+    public void SetCell(int row, int col, int value)
+    {
+        Grid[row, col] = value;
+    }
+    
+    #endregion
         
 }
