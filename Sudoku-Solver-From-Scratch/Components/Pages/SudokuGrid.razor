@@ -21,7 +21,8 @@
                value="@(Board.Grid[row, col] != 0 ? Board.Grid[row, col] : "")"
                @ref="_cellReferences[currentRow, currentCol]"
                @oninput="value => CellInput(currentRow, currentCol, value)"
-               @onkeydown:preventDefault="@_cellNotFocused"/>
+               @onkeydown:preventDefault="@_cellNotFocused"
+               @onclick="() => OnCellClick(currentRow, currentCol)"/>
     }
 }
 </div>
@@ -213,6 +214,13 @@
     public async Task FocusGrid()
     {
         await _gridReference.FocusAsync();
+    }
+
+    private void OnCellClick(int row, int col)
+    {
+        _selectedRow = row;
+        _selectedCol = col;
+        _cellNotFocused = false;
     }
     
 }
