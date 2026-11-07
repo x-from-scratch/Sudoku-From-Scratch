@@ -42,10 +42,11 @@
 
 .user-input {
     font-weight: bold;
+    background-color: #dcebe8;
 }
 
 .selected-cell {
-    background-color: #facc15;
+    background-color: #fde68a;
     border: 2px solid #eab308;
 }
 
@@ -55,5 +56,5 @@
 
 .wrong-cell {
     color: #842029;
-    background-color: #f1aeb5;
+    background-color: #FECACA;
 }

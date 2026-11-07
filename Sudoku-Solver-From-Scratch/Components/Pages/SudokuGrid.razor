@@ -31,6 +31,8 @@
     [Parameter]
     public SudokuBoard Board { get; set; } = new();
 
+    #region Attributes
+    
     // Focusing and navigating functionality
     private int _selectedRow = 0;
     private int _selectedCol = 0;
@@ -39,6 +41,8 @@
     
     private readonly ElementReference[,] _cellReferences = new ElementReference[9, 9];
     private ElementReference _gridReference;
+    
+    #endregion
     
     // Set focus on the grid for the first render.
     protected override async Task OnAfterRenderAsync(bool firstRender)
