@@ -4,8 +4,7 @@ A Sudoku solver and playable board built with **C# and Blazor Server**. The solv
 
 🔗 **[Live Demo](https://sudoku-urix.onrender.com)** (hosted on Render's free tier, so the first load may take up to a minute)
 
-<!-- TODO: add a screenshot -->
-<!-- ![Screenshot](docs/screenshot.png) -->
+<img width="1470" height="811" alt="Screenshot 2026-11-07 at 22 04 53" src="https://github.com/user-attachments/assets/1c7ef30b-9630-44ff-9afe-388e09b02722" />
 
 ## Features
 
