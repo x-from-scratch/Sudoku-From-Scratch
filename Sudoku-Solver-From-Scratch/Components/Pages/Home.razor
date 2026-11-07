@@ -5,7 +5,7 @@
 
 <h1>Sudoku Solver</h1>
 
-<SudokuGrid Board="_board" />
+<SudokuGrid Board="_board" @ref="_sudokuGrid"/>
 
 <button class="btn btn-primary"
         @onclick="SolveSudoku">
@@ -20,18 +20,26 @@
 @code {
     
     private SudokuBoard _board = new();
+    
+    private SudokuGrid _sudokuGrid = new();
 
-    private void SolveSudoku()
+    private async Task SolveSudoku()
     {
         _board.SolveSudoku();
         
         StateHasChanged();
+
+        // Refocus the grid.
+        await _sudokuGrid.FocusGrid();
     }
 
-    private void ClearSudoku()
+    private async Task ClearSudoku()
     {
         _board.Clear();
         
         StateHasChanged();
+        
+        // Refocus the grid.
+        await _sudokuGrid.FocusGrid();
     }
 }
