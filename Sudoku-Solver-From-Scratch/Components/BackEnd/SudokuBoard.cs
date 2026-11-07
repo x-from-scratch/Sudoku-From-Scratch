@@ -178,6 +178,7 @@ public class SudokuBoard
             {
                 Grid[i, j] = 0;
                 UserInput[i, j] = false;
+                WrongCell[i, j] = false;
             }
         }
     }
