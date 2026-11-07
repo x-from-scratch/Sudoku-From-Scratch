@@ -3,23 +3,32 @@
 
 @rendermode InteractiveServer
 
+<PageTitle>Sudoku</PageTitle>
+
 <div class="sudoku-wrapper">
-    <div class="sudoku-container">
+    <header class="sudoku-header">
+        <h1>Sudoku Solver</h1>
+    </header>
 
-        <SudokuGrid Board="_board" @ref="_sudokuGrid" />
+    <div class="sudoku-card">
 
-        <div class="sudoku-controls">
-            <button class="btn btn-primary" @onclick="SolveSudoku">
-                Solve
-            </button>
-
-            <button class="btn btn-secondary" @onclick="ClearSudoku">
-                Clear
-            </button>
+        <div class="sudoku-board">
+            <SudokuGrid Board="_board" @ref="_sudokuGrid" />
         </div>
+
+        <aside class="sudoku-controls">
+            <button class="sudoku-btn sudoku-btn--primary" @onclick="SolveSudoku">
+                ✓ Solve
+            </button>
+
+            <button class="sudoku-btn sudoku-btn--secondary" @onclick="ClearSudoku">
+                ✕ Clear
+            </button>
+        </aside>
 
     </div>
 </div>
+
 
 @code {
     
