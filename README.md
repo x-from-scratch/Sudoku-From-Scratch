@@ -58,7 +58,7 @@ Components/
 ```
 ## Demo
 
-https://github.com/user-attachments/assets/dfa22a96-c4f0-4c2c-8bc6-9d6827c76e13
+![Demo](https://github.com/x-from-scratch/Sudoku-From-Scratch/blob/master/SudokuShowcase.gif)
 
 
 
